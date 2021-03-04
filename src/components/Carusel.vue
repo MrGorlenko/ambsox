@@ -4,6 +4,7 @@
     :slides-per-view="3.5"
     :space-between='50'
     @swiper="onSwiper"
+    class='d-lg-block d-none'
     @slideChange="onSlideChange">
       <swiper-slide
       v-for='good in goods'
@@ -19,6 +20,30 @@
           </div> 
       </swiper-slide>
     </swiper>
+
+
+    <swiper 
+    :slides-per-view="1.5"
+    :space-between='50'
+    @swiper="onSwiper"
+    class='d-lg-none d-block'
+    @slideChange="onSlideChange">
+      <swiper-slide
+      v-for='good in goods'
+      :key='good'>
+          <div @click='selectGood(good.info.title, good.info.price, good.info.oldPrice, good.colors, good.sizes, good.languages)'>
+            <img class='Carusel__img' src="https://images.squarespace-cdn.com/content/5a265c07e9bfdf7a6ed25906/1521663213784-8YM3DS9OT2SU9GWR1ZQB/AMBsox_classicGrip_Black.jpg?content-type=image%2Fjpeg" alt="">
+            <p class="Carusel__title w-100">
+              {{good.info.title}}
+            </p>
+            <p class="Carusel__price">
+              CHF {{good.info.price}}
+            </p>
+          </div> 
+      </swiper-slide>
+    </swiper>
+
+
   </div>
     <Modal 
   v-if='ModalState == true'

@@ -1,7 +1,7 @@
 <template>
   <div class="Basket">
-    <div class="container d-flex ">
-      <div class="col-7">
+    <div class="container d-flex flex-lg-row flex-column">
+      <div class="col-lg-7 col-12">
         <div class="Basket__title">
           <h2><span v-for='title in BasketTitles'
           :key='title'>
@@ -16,7 +16,7 @@
             <img class='w-100' 
               src="https://images.squarespace-cdn.com/content/5a265c07e9bfdf7a6ed25906/1521663213784-8YM3DS9OT2SU9GWR1ZQB/AMBsox_classicGrip_Black.jpg?content-type=image%2Fjpeg" alt="">
           </div>
-          <div class="col-7">
+          <div class="col-lg-7 col-5">
             <p class='Basket__name Basket__about' >{{good.name}}</p>
             <p class='Basket__color Basket__about'  
             v-if='good.color != null'>
@@ -38,7 +38,7 @@
 
              {{good.size}} </p>
           </div>
-          <div class="col-3 pr-0 d-flex align-items-center justify-content-between">
+          <div class="col-lg-3 col-5 pr-0 d-flex align-items-center justify-content-between">
 
             <div>
               <p>CHF {{good.price}}</p>
@@ -56,14 +56,15 @@
         </div>
 
       </div>
-      <div class="col-5">
-        <div class="Basket__title">
+      <div class="Basket__overall col-lg-5 col-12">
+        <div class="Basket__title Basket__title_m">
           <h2><span v-for='sum in BasketSums'
           :key='sum'>
             <span v-if='sum.isActive == true'>
               {{sum.name}}
             </span>
           </span></h2>
+          </div>
           <hr class='w-100'>
           <div class='d-flex w-100 justify-content-between align-items-center'>
             <p>
@@ -88,7 +89,7 @@
             </button>
           </router-link>
 
-        </div>
+        
       </div>
     </div>
   </div>
@@ -132,7 +133,7 @@ export default {
 <style lang='scss'>
   .Basket{
     min-height: 100vh;
-    &__title{
+    &__title, &__overall{
       background: #F9F9F9;
       border-radius: 8px;
       text-align: start;
@@ -197,6 +198,34 @@ export default {
       &:hover{
         transition: .3s ease;
         background: darken($color: #FFC499, $amount: 10);
+      }
+    }
+  }
+
+  @media (max-width: 992px){
+    .Basket{
+      .container{
+        padding: 0;
+      }
+      min-height: 400px;
+      &__overall{
+        background: none;
+      }
+      &__item{
+        padding: 12px 8px;
+      }
+      &__name{
+        font-size: 14px;
+      }
+      &__color, &__size{
+        font-size: 12px;
+      }
+      &__title{
+        font-size: 28px;
+        &_m{
+          background: none !important;
+          padding: 0;
+        }
       }
     }
   }

@@ -1,12 +1,12 @@
 <template>
     <div :style='"background: url(" + ourSoxInterface.mainPic + ")"' 
-     class='OurSox__hero d-flex'>
+     class='OurSox__hero d-flex flex-lg-row flex-column'>
       <div 
       :class="{'d-none':block.isActive==false,
       'd-flex':block.isActive==true}"
-      class='col-7 flex-column OurSox__heroContent 
-       justify-content-center
-       align-items-center col-5 p-0'
+      class='col-lg-7 col-12 flex-column OurSox__heroContent 
+       justify-content-lg-center
+       align-items-lg-center'
       v-for='block in homeBlock' :key='block'
       >
       <h2 class='OurSox__title'>{{block.aboutTitle}}</h2>
@@ -17,7 +17,8 @@
         </p>
       </div>
       </div>
-      <div class='col-5 OurSox__mainPic'>
+      <div class='col-lg-5 col-12 OurSox__mainPic p-0'>
+        <img class='d-lg-none' :src="ourSoxInterface.mainPicMobile" alt="">
       </div>
     </div>
 
@@ -26,7 +27,7 @@
         <info
         v-for='(item, index) in elem.OurSoxContent'
         :key='item'
-        :class="{'flex-row-reverse': index % 2 == 1  }"
+        :class="{'flex-lg-row-reverse': index % 2 == 1 , 'flex-lg-row': index % 2 != 1 }"
         :title='item.title'
         :Image='mainPics[index]'
         :SloganBase='item.slogan.base'
@@ -93,12 +94,42 @@ export default {
     }
     &__heroContent{
       height: 100vh;
+      padding-left: 16px;
+      padding:0;
     }
     &__mainPic{
       min-height: 100vh;
       img{
         object-fit: cover;
         width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 992px){
+    .OurSox{
+      &__container{
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+      }
+      &__hero{
+        min-height: initial;
+        padding-top: 145px;
+      }
+      &__title , &__subtitle{
+        font-size: 32px;
+        width: 100%;
+      }
+      &__subtitle{
+        color: #FF994F;
+      }
+      &__heroContent{
+        height: initial;
+        padding-left: 16px;
+      }
+      &__mainPic{
+        min-height: initial;
       }
     }
   }

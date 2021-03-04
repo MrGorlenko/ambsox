@@ -1,6 +1,6 @@
 <template>
 
-  <footer class='Footer d-flex 
+  <footer class='Footer
   flex-column
   align-items-center justify-content-center' >
   
@@ -41,7 +41,7 @@
      'd-flex': item.isActive==true}"  
     v-for='item in Base' :key='item' 
     class="Footer__bottomLinks justify-content-center">
-    <div class='d-flex' v-if='item.isActive==true'>
+    <div class='d-flex flex-lg-row flex-column' v-if='item.isActive==true'>
       <a class='Footer__bottomLink' :href='link.url' 
       v-for='link in item.FooterLinks' :key='link'>
         {{link.name}}
@@ -117,6 +117,44 @@ export default {
       color: #9F9F9F;
       margin-right: 24px;
       font-size: 18px;
+    }
+  }
+
+  @media (max-width: 992px){
+    .Footer{
+      height: initial;
+      min-height: initial;
+      &__subscribe{
+        width: 95%;
+        padding: 24px 0px;
+      }
+      &__questions{
+        margin-top: 130px;
+        margin-bottom: 30px;
+      }
+      &__input{
+        width: 58%;
+      }
+      &__button{
+        font-size: 14px;
+      }
+      &__bottomLinks{
+        padding-bottom: 0px;
+        position: initial;
+        padding-bottom: 48px;
+      }
+      &__bottomLink{
+        margin-top: 32px;
+        
+      }
+    }
+  }
+
+  @media (max-width : 360px){
+    .Footer{
+      &__input{
+        margin-bottom: 15px;
+      }
     }
   }
 </style>

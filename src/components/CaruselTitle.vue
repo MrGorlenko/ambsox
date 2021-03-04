@@ -42,4 +42,13 @@ export default {
     }
   }
 
+  @media (max-width: 992px){
+    .Carusel{
+      &__title{
+        width: 80%;
+        margin:auto;
+      }
+    }
+  }
+
 </style>

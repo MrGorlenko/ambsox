@@ -1,13 +1,15 @@
 const Interface = {
   state: {
     MainPagehero: require('@/assets/homeHero.png'),
+    MainPageHeroMobile: require('@/assets/homeHeroMobile.png'),
     MainPagePic: {
       0: require('@/assets/mainPic1.png'),
       1: require('@/assets/mainPic2.png')
     },
     AboutPage:{
       heroBlockColor: 'linear-gradient(284.02deg, #C3AF8D 21.2%, #E4D8C0 100%)',
-      mainPic: require('@/assets/OurSoxHero.png')
+      mainPic: require('@/assets/OurSoxHero.png'),
+      mainPicMobile: require('@/assets/OurSoxHeroMobile.png')
     },
     OurSoxPagePics:{
       0: require('@/assets/OurSox1.png'),

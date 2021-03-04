@@ -1,14 +1,14 @@
 <template>
   <div class="Modal Modal_shop d-flex 
-  justify-content-center 
-  align-items-center">
-    <div class="Modal__window Modal__window_shop d-flex">
+  justify-content-lg-center 
+  align-items-lg-center">
+    <div class="Modal__window Modal__window_shop d-flex flex-lg-row flex-column">
       <img 
       @click='closeModal()'
       src="@/assets/ModalClose.svg" alt="" 
       class="Modal__close">
 
-      <div class="col-7 Modal__pics"
+      <div class="col-lg-7 col-12 Modal__pics"
       :class="{'d-flex justify-content-center align-items-center':picsQuontity<4}">
         <swiper
         :space-between='10'
@@ -37,7 +37,7 @@
         </swiper>
       </div>
 
-      <div class="col-5 Modal__content d-flex flex-column justify-content-between">
+      <div class="col-lg-5 col-12 Modal__content d-flex flex-column justify-content-between">
         <div>
           <h4 class='Modal__title'>{{title}}</h4>
 
@@ -408,6 +408,29 @@ export default {
         li{
           margin-left: 20px;
         }
+      }
+    }
+  }
+
+  @media (max-width: 992px){
+    .Modal{
+      &__window{
+        &_shop{
+        width: 100%;
+        position: fixed;
+        left:0;
+        bottom: 0;
+        border-radius: 12px 12px 0px 0px;
+        overflow-y: scroll;
+        }
+        &_shop{
+          min-height: 93%;
+          max-height: 94%;
+        }
+      }
+      &__close{
+        right: 10px;
+        top: 10px;
       }
     }
   }

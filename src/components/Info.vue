@@ -1,9 +1,10 @@
 <template>
-  <div class="Info d-flex justify-content-between m-0 align-items-center">
-    <div class="Info__img col-5 p-0">
+  <div class="Info d-flex 
+  flex-column-reverse justify-content-between m-lg-0 align-items-center">
+    <div class="Info__img col-lg-5 col-12 p-0">
       <img :src='Image' alt="">
     </div>
-    <div class="Info__content col-6 p-0">
+    <div class="Info__content col-lg-6 col-12 p-0">
       <h3 class='Info__title'>{{title}}</h3>
       <h4 v-if='subtitle!=""' class='Info__subtitle'>{{subtitle}}</h4>
       <div v-if="SloganBase!='' && SloganBottom!=''" class="Info__slogan">
@@ -82,6 +83,7 @@ export default {
 
 <style lang='scss'>
  .Info{
+   margin: 0;
    height: 100vh;
    &__title, &__subtitle, &__paragraphs, 
    &__bottomText, &__sloganBase, &__sloganBottom,
@@ -166,6 +168,25 @@ export default {
      &_filled{
        background: #FFC499;
        border: none;
+     }
+   }
+ }
+
+ @media (max-width: 992px){
+   .Info{
+     margin-top: 100px;
+     height: auto;
+    //  margin-top: 120px;
+     &__title{
+       font-size: 32px;
+       line-height: 120%;
+     }
+     &__img{
+       margin-top: 32px;
+     }
+     &__paragraphs, &__bottomText, 
+     &__sloganBase, &__sloganBottom, &__bottomTextTop, &__list, &__numberList{
+       font-size: 14px;
      }
    }
  }

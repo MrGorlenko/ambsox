@@ -5,7 +5,39 @@
       <h2 class='w-100 Shop__title' v-for='title in shopTitle' :key='title'>
         <p id='ShopTitle'></p>
       </h2>
-      <div class="Shop__cats">
+
+      
+
+    <swiper 
+    class='Shop__carusel d-block d-lg-none'
+      :slides-per-view='2'
+      :space-between='20'
+      :centeredSlides='true'
+      >
+      <swiper-slide 
+      @click='setAllCats()'
+       :class="{'Shop__cat_active': isAll==true}"
+       class='Shop__sliderElem'>
+        <span v-for='allCat in allCats'
+        :key='allCat'>
+          <span v-if='allCat.isActive==true'>{{allCat.name}}</span>
+        </span>
+      </swiper-slide>
+      <swiper-slide @click='setCat(cat)'
+       :class="{'Shop__cat_active': good.isActive==true && isAll==false}"
+       class='Shop__sliderElem' 
+      v-for='(good, cat, index) in Goods' 
+        :key='index'>
+        <span v-for='c in good.catLangs'
+          :key='c'>
+            <span v-if='c.isActive==true'>
+              {{c.name}}
+          </span>
+        </span>
+      </swiper-slide>
+    </swiper>
+
+      <div class="Shop__cats d-lg-block d-none">
         <p :class="{'Shop__cat_active': isAll==true}" 
         @click='setAllCats()' class='Shop__cat' >
         <span v-for='allCat in allCats'
@@ -25,6 +57,8 @@
           </span>
         </p>
       </div>
+
+
       <div class="Shop__goods">
         <div v-for='good in Goods' :key='good'>
           <div class='Shop__items d-flex flex-wrap' v-if='good.isActive==true'>
@@ -79,10 +113,13 @@
 <script>
 import {mapState, mapMutations} from 'vuex'
 import Modal from '@/components/Modal'
+import {Swiper, SwiperSlide} from 'swiper/vue'
+import 'swiper/swiper.scss'
 export default {
   name: 'Shop',
   components: {
-    Modal
+    Modal,
+    Swiper, SwiperSlide,
   },
   computed: {
     ...mapState({
@@ -219,9 +256,11 @@ export default {
           background: rgba(0, 0, 0, 0.2);
         }
         .Shop{
-          &__goodAbout{
-            bottom: 0;
-            transition: bottom .4s ease;
+          @media screen and (min-width: 992px){
+            &__goodAbout{
+              bottom: 0;
+              transition: bottom .4s ease;
+            }
           }
           &__button{
             opacity: 1;
@@ -291,6 +330,32 @@ export default {
       left:0;
       width: 100%;
       background: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  @media (max-width: 992px){
+    .Shop{
+      &__title{
+        margin-bottom: 0;
+      }
+      &__goods{
+        width: 100%;
+      }
+      &__item{
+        width: 48%;
+        margin-right: 2%;
+        height: auto;
+        &:nth-child(even){
+          margin-right: 0;
+        }
+      }
+      &__carusel{
+        margin-bottom: 32px;
+      }
+      &__sliderElem{
+        width: 140px !important;
+        padding: 12px 8px;
+      }
     }
   }
 </style>

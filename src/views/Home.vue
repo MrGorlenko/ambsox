@@ -4,9 +4,9 @@
      :style=" 'background: url(' + mainPageHero + ')' "
      class="home__hero d-flex justify-content-end row w-100 m-0">
       <div
-       class='d-flex align-items-center col-5 p-0 
-       h-100 flex-column 
-       justify-content-center'
+       class='d-flex align-items-lg-center align-items-start col-12  col-lg-5 p-lg-0 
+        flex-column 
+       justify-content-center align-items-center'
       >
       <div :class="{'d-none':block.isActive==false,
         'd-flex':block.isActive==true}"
@@ -15,14 +15,14 @@
           <h1 class='home__title'>{{block.MainSlogan}}</h1>
         </div>
       </div>
-                      <h3 v-for='subTitle in MainSubtitle' :key='subTitle'
+          <h3 v-for='subTitle in MainSubtitle' :key='subTitle'
            class='home__subtitle'>
             <p id='homeSubtitle'></p>
           </h3>
       </div>
 
-      <div class="home__img col-6 p-0 h-100">
-
+      <div class="home__img col-lg-6 col-12 p-0 h-100">
+        <img class='w-100' :src="MainPageHeroMobile" alt="">
       </div>
     </div>
 
@@ -32,7 +32,7 @@
       <div v-if='elem.isActive==true'>
         <info
           v-for='(item, index) in elem.HomePageContent'
-          :class="{'flex-row-reverse': index % 2 == 1  }"
+          :class="{'flex-lg-row-reverse': index % 2 == 1  }"
           :Image='mainPics[index]'
           :key='index'
           :title='item.title'
@@ -89,6 +89,7 @@ export default {
     ...mapState({
       MainSubtitle: state => state.MainSubtitle,
       mainPageHero: state => state.Interface.MainPagehero,
+      MainPageHeroMobile: state => state.Interface.MainPageHeroMobile,
       homeBlock: state => state.Base.BASE,
       Goods: state => state.Base.GOODS,
       mainPics: state => state.Interface.MainPagePic,
@@ -139,8 +140,8 @@ $bg-blur:linear-gradient(360deg, rgba(0, 0, 0, 0) 80%, rgba(255,255,255,.5) 100%
    margin-top: - $mainPaddingTop;
    min-height: 100vh;
    width: 100%;
-  position: relative;
-  z-index: 2;
+   position: relative;
+   z-index: 2;
   
    &__hero{
     height: 100vh;
@@ -195,4 +196,41 @@ $bg-blur:linear-gradient(360deg, rgba(0, 0, 0, 0) 80%, rgba(255,255,255,.5) 100%
      height: 100vh;
    }
  }
+
+ @media (max-width: 992px){
+   $bg-blur:linear-gradient(360deg, rgba(0, 0, 0, 0) 40%, rgba(235,237,238,1) 100%);
+   .home{
+     &__hero{
+       padding-top: $mobilePaddingTop;
+       min-height: 100vh;
+       height: initial;
+     }
+     &__title{
+       font-size: 32px;
+       margin-bottom: 16px;
+     }
+     &__subtitle{
+       font-size: 19px;
+     }
+     &__img{
+       position: relative;
+       &::after{
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 40%;
+         display: block;
+         background: $bg-blur;
+         content: '';
+       }
+     }
+     &__carusel{
+       height: initial;
+       padding-top: 140px;
+     }
+   }
+ }
+
+
 </style>

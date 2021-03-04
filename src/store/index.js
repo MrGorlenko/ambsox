@@ -5,6 +5,7 @@ import Interface from '@/store/Interface'
 
 export default createStore({
   state: {
+    Burger: false,
     MainSubtitle: {
       'Ru': {
         name: 'идеальные ШВЕЙЦАРСКИЕ носки для вашего любимого вида спорта!',
@@ -319,6 +320,10 @@ export default createStore({
 
     SET_INITIAL_SLIDE(state, index){
       state.InitialSlideGallery = index
+    },
+
+    TOGGLE_BURGER(state){
+      state.Burger = !state.Burger
     }
   },
   actions: {

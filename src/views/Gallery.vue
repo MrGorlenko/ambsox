@@ -1,6 +1,6 @@
 <template>
   <div class="Gallery">
-    <h2>
+    <h2 class='Gallery__title'>
       <span v-for='title in GalleryTitle'
       :key='title'>
         <span v-if='title.isActive == true'>
@@ -78,6 +78,27 @@ export default {
         margin-right: 0;
       }
 
+    }
+  }
+
+  @media (max-width: 992px){
+    .Gallery{
+      &__title{
+        margin-bottom: 20px;
+        text-align: start;
+        width: 95%;
+        padding-left: 2.5%;
+      }
+      &__container{
+        width: 95%;
+      }
+      &__item{
+        width: 100%;
+        &:nth-child(6n), &:nth-child(6n+1), &:first-child, &:nth-child(7){
+          width: 100%;
+        }
+        margin-bottom: 10px;
+      }
     }
   }
 

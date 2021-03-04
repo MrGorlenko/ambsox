@@ -3,36 +3,38 @@
     justify-content-center 
     align-items-center">
     <div class="Modal__window ModalGallery__window d-flex align-items-center">
-      <img 
-      @click='closeModal()'
-      src="@/assets/ModalClose.svg" alt="" 
-      class="Modal__close">
+      <!-- <div class='ModalGallery__innerWindow d-flex align-items-center'> -->
+        <img 
+        @click='closeModal()'
+        src="@/assets/ModalClose.svg" alt="" 
+        class="Modal__close">
 
-      <div class="Modal__arrow Modal__arrow_prev">
-        <img src="@/assets/arrowPrev.svg" alt="">
-      </div>
+        <div class="Modal__arrow Modal__arrow_prev">
+          <img src="@/assets/arrowPrev.svg" alt="">
+        </div>
 
-      <swiper
-        :slides-per-view="1"
-        :space-between="10"
-        :centeredSlides='true'
-        :initialSlide='InitialSlide'
-        :navigation="{
-          nextEl: '.Modal__arrow_next',
-          prevEl: '.Modal__arrow_prev'
-        }"
-        @swiper="onSwiper"
-        @slideChange="onSlideChange"
-        >
-        <swiper-slide v-for='n in 20' :key=n>
-          <img class='w-100'
-          src="https://images.squarespace-cdn.com/content/5a265c07e9bfdf7a6ed25906/1521663213784-8YM3DS9OT2SU9GWR1ZQB/AMBsox_classicGrip_Black.jpg?content-type=image%2Fjpeg" alt="">
-        </swiper-slide>
-      </swiper>
+        <swiper
+          :slides-per-view="1"
+          :space-between="10"
+          :centeredSlides='true'
+          :initialSlide='InitialSlide'
+          :navigation="{
+            nextEl: '.Modal__arrow_next',
+            prevEl: '.Modal__arrow_prev'
+          }"
+          @swiper="onSwiper"
+          @slideChange="onSlideChange"
+          >
+          <swiper-slide v-for='n in 20' :key=n>
+            <img class='w-100'
+            src="https://images.squarespace-cdn.com/content/5a265c07e9bfdf7a6ed25906/1521663213784-8YM3DS9OT2SU9GWR1ZQB/AMBsox_classicGrip_Black.jpg?content-type=image%2Fjpeg" alt="">
+          </swiper-slide>
+        </swiper>
 
         <div class="Modal__arrow Modal__arrow_next">
           <img src="@/assets/arrowNext.svg" alt="">
         </div>
+      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -94,7 +96,6 @@ export default {
   .Modal{
     &__arrow{
       position: absolute;
-      top: 0;
       z-index: 5;
       top: 292px;
       cursor: pointer;
@@ -103,6 +104,37 @@ export default {
       }
       &_next{
         right: -90px;
+      }
+    }
+  }
+
+  @media (max-width: 992px){
+    .ModalGallery{
+      &__window{
+        padding:0;
+        width: 95%;
+        height: 50%;
+        background: none;
+      }
+      &__innerWindow{
+        background: #fff;
+        height: 400px;
+        width: 100%;
+      }
+    }
+    .Modal{
+      &__close{
+        right: 9px;
+      }
+      &__arrow{
+        top: initial;
+        bottom: 0%;
+        &_prev{
+          left: 10px;
+        }
+        &_next{
+          right: 10px;
+        }
       }
     }
   }

@@ -1,147 +1,135 @@
 <template>
   <div class="Checkout">
-    <div class="container d-flex">
-      <div class="col-6">
-        <div v-if='firstStep==false' class="Checkout__step">
-          <p>1. Your Email</p>
-          <input v-model='email' type="text">
-          <button @click='confirmEmail(email)'>Continue</button>
-          <p>{{errorMail}}</p>
+    <div class="container d-flex align-items-center
+    justify-content-center flex-column">
+      <div class="Checkout__step">
+        <h2 class='Checkout__title w-100'>Your email</h2>
+
+        <div class="Checkout__inputBox
+        d-flex flex-column align-items-start">
+          <label for="email">Your email</label>
+          <input class='Checkout__input w-60' type="text" placeholder='Example@mail.com'>
+          <p>You will receive notification on your email</p>
         </div>
 
-        <div v-else class="Checkout__step">
-          <button @click='editEmail'>edit</button>
-          <p>1. Your Email is {{email}}</p>
+      </div>
+
+      <div class="Checkout__step d-flex flex-wrap">
+        <h2 class="Checkout__title w-100">Shipping</h2>
+
+        <div class="Checkout__inputBox d-flex flex-column align-items-start
+         w-50">
+         <label for="FirstName">First Name</label>
+         <input placeholder="First Name" type="text" class="Checkout__input w-95">
+         </div>
+        <div class="Checkout__inputBox d-flex flex-column align-items-end
+         w-50">
+         <label class='w-100 pl5' for="Second Name">Second Name</label>
+         <input placeholder='Second Name' class='Checkout__input w-95' type="text">
+         </div>
+
+        <div class="Checkout__inputBox w-100 mt-4
+        d-flex flex-column align-items-start">
+          <label for="Address1">Address 1</label>
+          <input class='Checkout__input w-100' type="text" placeholder='Address 1'>
         </div>
 
-        <div v-if='firstStep==true && secondStep == false' class="Checkout__step">
-          <p>2. Shipping</p>
-          <input type="text" placeholder="first name"
-          v-model='firstName'>
-          <input type="text" placeholder='last name'
-          v-model='secondName'>
-          <input type="text" placeholder="address 1"
-          v-model='address1'>
-          <input type="text" placeholder="address 2"
-          v-model='address2'>
-          <form action="">
-            <select autocomplete="off" id='checkoutId' v-for='option in CheckOut'
-            :key='option'>
-            <option
-            :selected="index==0 ? true : false"
-             v-for='(opt, index) in option.contries'
-             v-bind:value="opt"
-             :key='opt'>
-              {{opt}}
-            </option>  
+        <div class="Checkout__inputBox w-100 mt-4
+        d-flex flex-column align-items-start">
+          <label for="Address2">Address 2</label>
+          <input class='Checkout__input w-100' type="text" placeholder='Address 2'>
+        </div>
+
+        <div class="Checkout__inputBox w-100 mt-4
+        d-flex flex-column align-items-start">
+          <label for="Address2">Country</label>
+          <select class='Checkout__input w-100'>
+            <option value="Swiss">Switzerland</option>
           </select>
-          </form>
-
-          <div>
-            <input type="text" placeholder="postal code"
-            v-model='postalCode'>
-            <input type="text" placeholder="city"
-            v-model='city'>
-            <input type="text" placeholder="state"
-            v-model="state">
-          </div>
-          <button @click='confirmShipping'>Continue</button>
         </div>
 
-        <div v-else
-        class="Checkout__step">
-          <button @click='editShipping'
-           v-if='secondStep==true && firstStep==true'>
-            edit
-          </button>
-          <p>2. Shipping</p>
-          {{firstName}}
-          {{secondName}}
-          {{address1}}
-          {{address2}}
-          <div>
-            {{postalCode}}
-
-            {{city}} 
-
-            {{state}}
-          </div>
-          {{country}}
+        <div class="Checkout__inputContainer w-100 d-flex justify-content-between">
+          
+        <div class="Checkout__inputBox mt-4
+        d-flex flex-column align-items-start w-32">
+          <label for="Postal Code ">Postal Code</label>
+          <input class='Checkout__input w-100' 
+          type="text" placeholder="Postal Code">
         </div>
 
-
-        <div class='Checkout__step' v-if='firstStep==true && secondStep == true && thirdStep==false'>
-          <p>3. Payment and discount</p>
-          <div class='payment d-flex'>
-            <input v-model='CardNumber'
-             class='col-7' placeholder='Card number' type="text">
-            <input v-model='MM_YY'
-             class='col-2' placeholder='MM/YY' type="text">
-            <input v-model='CVC'
-             class='col-2' placeholder="CVC" type="text">
-          </div>
-
-          <div>
-            <input v-model='discountCode'
-             type="text" placeholder='discount Code'>
-          </div>
-
-          <button @click='confirmPayment'> Continue</button>
+        <div class="Checkout__inputBox mt-4
+        d-flex flex-column align-items-start w-32">
+          <label for="Postal Code ">Postal Code</label>
+          <input class='Checkout__input w-100' 
+          type="text" placeholder="Postal Code">
         </div>
 
-        <div class='Checkout__step' v-else>
-          <p>3. Payment and discount</p>
-          Your card is {{CardNumber}}
+        <div class="Checkout__inputBox mt-4
+        d-flex flex-column align-items-start w-32">
+          <label for="Postal Code ">Postal Code</label>
+          <input class='Checkout__input w-100' 
+          type="text" placeholder="Postal Code">
         </div>
 
-        <div v-if='firstStep==true && secondStep==true && thirdStep==true' class="Checkout__step">
-          <p>4. Review and purchase</p>
-          <p>Yay! letter we'll deliver</p>
-        </div>
-
-        <div v-else class='Checkout__step'>
-          <p>4. Review and purchase</p>
         </div>
       </div>
-      <div class="col-6"> 
-        <h3>Order summary</h3>
-        <div class="Checkout__item d-flex align-items-center" v-for='(good, index) in Goods' :key='good'>
-          <div class="col-2 p-0">
-            <img class='w-100' 
-              src="https://images.squarespace-cdn.com/content/5a265c07e9bfdf7a6ed25906/1521663213784-8YM3DS9OT2SU9GWR1ZQB/AMBsox_classicGrip_Black.jpg?content-type=image%2Fjpeg" alt="">
-          </div>
-          <div class="col-7">
-            <p class='Basket__name Basket__about' >{{good.name}}</p>
-            <p class='Basket__color Basket__about'  
-            v-if='good.color != null'>
-              <span v-for="itemInfo in BasketColorSize"
-              :key='itemInfo'>
-                <span v-if='itemInfo.isActive==true'>
-                  {{itemInfo.color}} :
-                </span>
-              </span>
-            {{good.color}}</p>
-            <p class='Basket__size Basket__about'  
-            v-if='good.size != null'> 
-            <span v-for="itemInfo in BasketColorSize"
-              :key='itemInfo'>
-                <span v-if='itemInfo.isActive==true'>
-                  {{itemInfo.size}} :
-                </span>
-              </span>
 
-             {{good.size}} </p>
-          </div>
-          <div class="col-3 pr-0 d-flex flex-column align-items-center justify-content-between">
 
-            <div>
-              <p>CHF {{good.price}}</p>
-            </div>
-            
-             <span @click='removeGood(index); removeGoodPrice(good)'>Remove</span>
-          </div>
+      <div class="Checkout__step">
+        <h2 class="Checkout__title">
+          Shipping options
+        </h2>
+
+        <div class='d-flex align-items-center Checkout__shippingOption'>
+          <input type="radio">
+          <span>Switzerland - CHF 0.00</span>
         </div>
       </div>
+
+      <div class="Checkout__step">
+        <h2 class="Checkout__title">
+          Payment
+        </h2>
+
+        <div class="Checkout__inputBox
+        d-flex flex-wrap align-items-start">
+          <label class='w-100' for="Card">Card Number</label>
+
+          <div class="Checkout__cardWrapper w-100">
+            <input class='Checkout__CardInput Checkout__CardInput_big pr-0' 
+            type="text" placeholder="Card Number">
+            <input class='Checkout__CardInput Checkout__CardInput_small pr-0' 
+            type="text" placeholder="MM/YY">
+            <input class='Checkout__CardInput Checkout__CardInput_small pr-0' 
+            type="text" placeholder="CVC">
+          </div>
+          <p>Transactions are secure and encrypted</p>
+        </div>
+
+        <hr class='w-100'>
+
+        <div class="Checkout__inputBox
+        d-flex flex-column align-items-start">
+          <label for="promo">Promocode</label>
+          <div class='d-flex'>
+            <input class='Checkout__input' placeholder='Promocode' type="text">
+            <button class="Checkout__promocodeButton">
+              Apply
+            </button>
+          </div>
+        </div>
+
+        <div class='Checkout__askForBilling d-flex align-items-center'>
+          <input type="checkbox">
+          <p>Billing address <span>(Use shipping address)</span> </p>
+        </div>
+
+        
+      </div>
+
+      
+      
+
     </div>
   </div>
 </template>
@@ -158,60 +146,24 @@ export default {
     })
   },
   methods:{
-    confirmEmail(email){
-      // if (this.validEmail(email)){
-        this.firstStep = true
-        this.errorMail = ''
-        // }
-      // else {
-        // this.errorMail = 'please enter the correct email'
-        // }
-        this.country = 'Switzerland'
-    },
-    editEmail(){
-      this.firstStep = false
-    },
+    // confirmEmail(email){
+    //   // if (this.validEmail(email)){
+    //     this.firstStep = true
+    //     this.errorMail = ''
+    //     // }
+    //   // else {
+    //     // this.errorMail = 'please enter the correct email'
+    //     // }
+    //     this.country = 'Switzerland'
+    // },
     validEmail:function(email) {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
     },
 
-    confirmShipping(){
-      this.secondStep = true
-    },
-    editShipping(){
-      this.secondStep = false
-    },
-    validCardNumber: function(card) {
-
-    },
-
-    confirmPayment(){
-      this.thirdStep = true
-    }
   },
   data(){
     return {
-      email: '',
-      errorMail: '',
-      firstStep: false,
-
-      firstName: '',
-      secondName: '',
-      address1: '',
-      address2: '',
-      country: '',
-      postalCode: '',
-      city: '',
-      state: '',
-      secondStep: false,
-
-      cardNumber: '',
-      MM_YY: '',
-      CVC: '',
-      discountCode: '',
-      thirdStep: false
-
     }
   }
 }
@@ -219,26 +171,92 @@ export default {
 
 <style lang='scss'>
 
-.Checkout{
-  &__step{
-    border: 1px solid black;
-    margin-bottom: 22px;
+  .Checkout{
+    padding-bottom: 141px;
+    .w-32{
+      width: 32%;
+    }
+    .w-60{
+      width: 60%;
+    }
+    .w-95{
+      width: 95%;
+    }
+    .pl5{
+      padding-left: 5%;
+    }
+    &__title{
+      text-align: start;
+      margin-bottom: 32px;
+    }
+    &__step{
+      width: 600px;
+      margin-bottom: 48px;
+    }
+    &__inputBox{
+      label {
+        text-align: start;
+      }
+    }
+    &__shippingOption{
+      background: rgba(240, 244, 248, 0.5);
+      border-radius: 8px;
+      padding: 12px;
+      span{
+        margin-left: 10px;
+      }
+    }
+    &__input{
+      padding: 12px;
+      background: #F0F4F8;
+      border-radius: 8px;
+      box-shadow: inset 0px 2px 2px -1px rgba(74, 74, 104, 0.1);
+      border: none;
+      outline: none;
+      &:focus{
+        background: none;
+        box-shadow: 0px 0px 0px 4px rgba(255, 139, 111, 0.2);
+        outline: none;
+        border: #ffa9a9;
+      }
+    }
+    &__cardWrapper{
+      background: #F0F4F8;
+      box-shadow: inset 0px 2px 2px -1px rgba(74, 74, 104, 0.1);
+      border-radius: 8px;
+    }
+    &__CardInput{
+      padding: 12px;
+      border: none;
+      outline: none;
+      &_big{
+        width: 80%;
+        border: none;
+        background: none;
+      }
+      &_small{
+        width:13%;
+        margin-left: -3%;
+        padding-left: 0;
+        border: none;
+        background: none;
+      }
+    }
+    &__promocodeButton{
+      background: linear-gradient(135deg, #FF5F6D 2.88%, #FFC371 100%);
+      border-radius: 44px; 
+      border: none;
+      padding: 10px 20px;
+      color: #fff;
+      margin-left: 12px;
+    }
+    &__askForBilling{
+      background: rgba(240, 244, 248, 0.5);
+      border-radius: 8px;
+      padding: 12px;
+      p{
+        margin-bottom: 0;
+      }
+    }
   }
-}
-
-.payment{
-  input:first-child{
-    border-left: initial;
-    border-right: none;
-  }
-  input:last-child{
-    border-left: none;
-    border-right: initial;
-  }
-  input:nth-child(2){
-    border-left: none;
-    border-right: none;
-  }
-}
-
 </style>
