@@ -32,7 +32,7 @@
       <div v-if='elem.isActive==true'>
         <info
           v-for='(item, index) in elem.HomePageContent'
-          :class="{'flex-lg-row-reverse': index % 2 == 1  }"
+          :class="{'flex-lg-row-reverse': index % 2 == 1, 'flex-lg-row': index % 2 != 1  }"
           :Image='mainPics[index]'
           :key='index'
           :title='item.title'
