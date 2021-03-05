@@ -210,6 +210,7 @@ export default {
       min-height: 400px;
       &__overall{
         background: none;
+        max-height: 230px;
       }
       &__item{
         padding: 12px 8px;
